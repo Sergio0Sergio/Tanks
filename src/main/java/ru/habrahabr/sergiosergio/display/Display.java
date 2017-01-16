@@ -2,9 +2,8 @@ package ru.habrahabr.sergiosergio.display;
 
 
 import javax.swing.JFrame;
-import java.awt.Dimension;
-import java.awt.Canvas;
-import java.awt.Graphics;
+import java.awt.*;
+import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 import java.awt.image.DataBuffer;
@@ -23,8 +22,11 @@ public abstract class Display {
     private static int[] bufferData;
     private static Graphics bufferGraphics;
     private static int clearColor;
+    private static BufferStrategy bufferStrategy;
 
-    public static void create (int width, int height, String title, int _clearColor){
+
+
+    public static void create (int width, int height, String title, int _clearColor, int numBuffers){
 
         if(created){
 
@@ -46,7 +48,11 @@ public abstract class Display {
         buffer = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         bufferData = ((DataBufferInt) buffer.getRaster().getDataBuffer()).getData();
         bufferGraphics = buffer.getGraphics();
+        ((Graphics2D) bufferGraphics).setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         clearColor = _clearColor;
+
+        content.createBufferStrategy(numBuffers);
+        bufferStrategy = content.getBufferStrategy();
 
         created = true;
     }
@@ -55,12 +61,16 @@ public abstract class Display {
         Arrays.fill(bufferData, clearColor);
     }
 
-    public static void render(){
-
-    }
 
     public static void swapBuffers(){
-        Graphics g = content.getGraphics();
+        Graphics g = bufferStrategy.getDrawGraphics();
         g.drawImage(buffer, 0, 0, null);
+        bufferStrategy.show();
+    }
+
+    public static Graphics2D getGraphics(){
+
+        return ((Graphics2D) bufferGraphics);
+
     }
 }

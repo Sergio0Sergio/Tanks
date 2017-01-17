@@ -73,4 +73,14 @@ public abstract class Display {
         return ((Graphics2D) bufferGraphics);
 
     }
+
+    public static void destroy(){
+
+        if(!created){
+
+            return;
+        }
+
+        window.dispose();
+    }
 }

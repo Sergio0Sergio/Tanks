@@ -3,6 +3,8 @@ package ru.habrahabr.sergiosergio.game;
 import ru.habrahabr.sergiosergio.display.Display;
 import ru.habrahabr.sergiosergio.utils.Time;
 
+import java.awt.*;
+
 /**
  * Created by sg on 17.01.2017.
  */
@@ -20,6 +22,7 @@ public class Game implements Runnable {
 
     private boolean running;
     private Thread gameThread;
+    private Graphics2D graphics
 
 
     public Game(){

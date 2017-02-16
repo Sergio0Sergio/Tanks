@@ -1,6 +1,8 @@
 package ru.habrahabr.sergiosergio.display;
 
 
+import ru.habrahabr.sergiosergio.IO.Input;
+
 import javax.swing.JFrame;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -84,9 +86,17 @@ public abstract class Display {
         window.dispose();
     }
 
+    public static void addInputListener(Input inputListener){
+
+        window.add(inputListener);
+
+    }
+
     public static void setTitle(String title){
 
         window.setTitle(title);
 
     }
+
+
 }

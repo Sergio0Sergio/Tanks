@@ -62,7 +62,7 @@ public class Player extends Entity {
     }
 
     @Override
-    protected void update(Input input) {
+    public void update(Input input) {
 
         float newX = x;
         float newY = y;
@@ -72,16 +72,38 @@ public class Player extends Entity {
             heading = Heading.NORTH;
         }else if (input.getKey(KeyEvent.VK_RIGHT)){
             newX += speed;
+            heading= Heading.EAST;
         }else if (input.getKey(KeyEvent.VK_DOWN)){
             newY += speed;
+            heading = Heading.SOUTH;
         }else if (input.getKey(KeyEvent.VK_LEFT)){
             newX -= speed;
+            heading = Heading.WEST;
         }
+
+        if(newX < 0){
+            newX = 0;
+        }else if(newX >= Game.WIDTH - SPRITE_SCALE * scale){
+            newX = Game.WIDTH - SPRITE_SCALE * scale;
+        }
+        if(newY < 0){
+            newY = 0;
+        }else if(newY >= Game.HEIGHT - SPRITE_SCALE * scale){
+            newY = Game.HEIGHT - SPRITE_SCALE * scale;
+        }
+
+        x = newX;
+        y = newY;
+
+
 
     }
 
     @Override
-    protected void render(Graphics2D g) {
+    public void render(Graphics2D g) {
+
+        spriteMap.get(heading).render(g, x, y);
+
 
     }
 }

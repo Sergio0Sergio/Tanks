@@ -56,6 +56,7 @@ public class Level {
             for(int j = 0; j < tileMap[i].length; j++){
                 tiles.get(TileType.fromNumeric(tileMap[i][j])).render(g, j * SCALED_TILE_SIZE, i * SCALED_TILE_SIZE);
 
+
             }
         }
 

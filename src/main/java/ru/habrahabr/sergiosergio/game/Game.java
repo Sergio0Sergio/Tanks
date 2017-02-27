@@ -3,14 +3,10 @@ package ru.habrahabr.sergiosergio.game;
 import ru.habrahabr.sergiosergio.IO.Input;
 import ru.habrahabr.sergiosergio.display.Display;
 import ru.habrahabr.sergiosergio.game.level.Level;
-import ru.habrahabr.sergiosergio.graphics.Sprite;
-import ru.habrahabr.sergiosergio.graphics.SpriteSheet;
 import ru.habrahabr.sergiosergio.graphics.TextureAtlas;
 import ru.habrahabr.sergiosergio.utils.Time;
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.image.BufferedImage;
 
 /**
  * Created by sg on 17.01.2017.
@@ -21,7 +17,7 @@ public class Game implements Runnable {
     public static final int HEIGHT = 600;
     public static final String TITLE = "Tanks";
     public static final int CLEAR_COLOR = 0xff000000;
-    public static final int NUMB_UFFERS = 3;
+    public static final int NUM_BUFFERS = 3;
 
     public static final float UPDATE_RATE = 60.0f;
     public static final float UPDATE_INTERVAL = Time.SECOND / UPDATE_RATE;
@@ -41,7 +37,7 @@ public class Game implements Runnable {
      public Game(){
 
         running = false;
-        Display.create(WIDTH, HEIGHT, TITLE, CLEAR_COLOR, NUMB_UFFERS);
+        Display.create(WIDTH, HEIGHT, TITLE, CLEAR_COLOR, NUM_BUFFERS);
         graphics = Display.getGraphics();
         input = new Input();
         Display.addInputListener(input);
@@ -90,6 +86,7 @@ public class Game implements Runnable {
     }
 
     private void render(){
+
         Display.clear();
         lvl.render(graphics);
         player.render(graphics);

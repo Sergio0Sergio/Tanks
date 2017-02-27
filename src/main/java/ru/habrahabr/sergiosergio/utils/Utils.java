@@ -21,7 +21,7 @@ public class Utils {
         return newImage;
     }
 
-    public static Integer [][] levelParser(String filePath){
+    public static Integer[][] levelParser(String filePath){
 
         Integer[][] result = null;
 
